@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  firm         String?
+  role         String?
+  phone        String?
+  passwordHash String?
+  image        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  accounts    Account[]
+  sessions    Session[]
+  preferences UserPreferences?
+  watchlist   Watchlist[]
+  briefings   Briefing[]
+  activityLog ActivityLog[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserPreferences {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  counties       String[]
+  propertyTypes  String[]
+  dealSizeRanges String[]
+  briefingTime   String   @default("07:00")
+  briefingFormat String   @default("detailed")
+  emailEnabled   Boolean  @default(true)
+  onboardingDone Boolean  @default(false)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Property {
+  id            String    @id @default(cuid())
+  address       String
+  city          String
+  state         String
+  zip           String
+  county        String
+  latitude      Float?
+  longitude     Float?
+  propertyType  String
+  squareFeet    Int?
+  units         Int?
+  yearBuilt     Int?
+  lotSize       Float?
+  zoningCode    String?
+  assessedValue Float?
+  lastSaleDate  DateTime?
+  lastSalePrice Float?
+  ownerName     String?
+  ownerType     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  transactions  Transaction[]
+  permits       Permit[]
+  opportunities Opportunity[]
+  watchlist     Watchlist[]
+  entityFilings EntityFiling[]
+}
+
+model Transaction {
+  id               String   @id @default(cuid())
+  propertyId       String
+  transactionType  String
+  price            Float?
+  pricePerSF       Float?
+  buyer            String?
+  seller           String?
+  recordedDate     DateTime
+  instrumentNumber String?
+  source           String?
+  aiInsight        String?
+  createdAt        DateTime @default(now())
+  property         Property @relation(fields: [propertyId], references: [id])
+
+  briefingTransactions BriefingTransaction[]
+}
+
+model Permit {
+  id             String   @id @default(cuid())
+  propertyId     String
+  permitType     String
+  estimatedValue Float?
+  applicant      String?
+  description    String?
+  filingDate     DateTime
+  status         String   @default("pending")
+  aiInsight      String?
+  createdAt      DateTime @default(now())
+  property       Property @relation(fields: [propertyId], references: [id])
+
+  briefingPermits BriefingPermit[]
+}
+
+model EntityFiling {
+  id                String    @id @default(cuid())
+  entityName        String
+  filingType        String
+  state             String
+  filingDate        DateTime
+  registeredAgent   String?
+  principalAddress  String?
+  relatedPropertyId String?
+  aiInsight         String?
+  createdAt         DateTime  @default(now())
+  relatedProperty   Property? @relation(fields: [relatedPropertyId], references: [id])
+}
+
+model Opportunity {
+  id                String    @id @default(cuid())
+  propertyId        String
+  score             Int
+  narrative         String
+  factors           Json
+  estimatedValue    Float?
+  recommendedAction String?
+  expiresAt         DateTime?
+  createdAt         DateTime  @default(now())
+  property          Property  @relation(fields: [propertyId], references: [id])
+
+  briefingOpportunities BriefingOpportunity[]
+}
+
+model Watchlist {
+  id         String   @id @default(cuid())
+  userId     String
+  propertyId String
+  triggers   Json?
+  notes      String?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property   Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([userId, propertyId])
+}
+
+model Briefing {
+  id               String    @id @default(cuid())
+  userId           String
+  date             DateTime
+  executiveSummary String?
+  sentAt           DateTime?
+  openedAt         DateTime?
+  createdAt        DateTime  @default(now())
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  transactions  BriefingTransaction[]
+  permits       BriefingPermit[]
+  opportunities BriefingOpportunity[]
+}
+
+model BriefingTransaction {
+  briefingId    String
+  transactionId String
+  briefing      Briefing    @relation(fields: [briefingId], references: [id])
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  @@id([briefingId, transactionId])
+}
+
+model BriefingPermit {
+  briefingId String
+  permitId   String
+  briefing   Briefing @relation(fields: [briefingId], references: [id])
+  permit     Permit   @relation(fields: [permitId], references: [id])
+
+  @@id([briefingId, permitId])
+}
+
+model BriefingOpportunity {
+  briefingId    String
+  opportunityId String
+  briefing      Briefing    @relation(fields: [briefingId], references: [id])
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id])
+
+  @@id([briefingId, opportunityId])
+}
+
+model ActivityLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  entityType String?
+  entityId   String?
+  metadata   Json?
+  timestamp  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
