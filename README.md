@@ -17,7 +17,14 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Prisma](https://img.shields.io/badge/Prisma-v7-2D3748?logo=prisma&logoColor=white)](https://prisma.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-A78BFA.svg)](LICENSE)
-[![Demo Ready](https://img.shields.io/badge/demo-ready-10B981.svg)]()
+[![Live Demo](https://img.shields.io/badge/live%20demo-darkmile.vercel.app-10B981.svg)](https://darkmile.vercel.app)
+[![Deployed on Vercel](https://img.shields.io/badge/▲%20deployed-vercel-000.svg)](https://darkmile.vercel.app)
+
+<br />
+
+### **→ [Try the live demo: darkmile.vercel.app](https://darkmile.vercel.app) ←**
+
+Sign in with any email and password — demo mode is enabled, no setup required.
 
 <br />
 
