@@ -240,6 +240,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const title = PAGE_TITLES[pathname] || "Dashboard";
   const notifs = useNotifications();
 
+  // Auto-collapse sidebar on narrow viewports
+  useEffect(() => {
+    function checkSize() {
+      if (typeof window !== "undefined" && window.innerWidth < 768) setCollapsed(true);
+    }
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const meta = e.metaKey || e.ctrlKey;

@@ -32,7 +32,19 @@ function SectionHeader({ icon, label, count, color }: { icon: React.ReactNode; l
 
 export default function BriefingPage() {
   const [view, setView] = useState<"digest" | "detail">("digest");
+  const [shared, setShared] = useState(false);
   const today = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+
+  const handlePrint = () => {
+    if (typeof window !== "undefined") window.print();
+  };
+  const handleShare = async () => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    if (navigator.share) {
+      try { await navigator.share({ title: "Darkmile Briefing", text: "Today's CRE intelligence briefing", url }); return; } catch { /* fall through to copy */ }
+    }
+    try { await navigator.clipboard.writeText(url); setShared(true); setTimeout(() => setShared(false), 1800); } catch { /* ignore */ }
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -44,12 +56,16 @@ export default function BriefingPage() {
             <h1 className="text-2xl font-bold mb-1" style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif)" }}>Daily Intelligence Briefing</h1>
             <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{today} · Franklin County, OH · Industrial + Office + Retail</p>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <button className="btn-ghost" style={{ padding: "8px 14px", fontSize: "13px" }}><Share2 size={14} />Share</button>
-            <button className="btn-ghost" style={{ padding: "8px 14px", fontSize: "13px" }}><Download size={14} />PDF</button>
+          <div className="flex items-center gap-2 flex-shrink-0 no-print">
+            <button onClick={handleShare} className="btn-ghost" style={{ padding: "8px 14px", fontSize: "13px" }}>
+              <Share2 size={14} />{shared ? "Copied!" : "Share"}
+            </button>
+            <button onClick={handlePrint} className="btn-ghost" style={{ padding: "8px 14px", fontSize: "13px" }}>
+              <Download size={14} />Save as PDF
+            </button>
           </div>
         </div>
-        <div className="flex items-center gap-1 p-1 rounded-xl w-fit" style={{ background: "rgba(255,255,255,0.04)" }}>
+        <div className="flex items-center gap-1 p-1 rounded-xl w-fit no-print" style={{ background: "rgba(255,255,255,0.04)" }}>
           {(["digest", "detail"] as const).map((v) => (
             <button key={v} onClick={() => setView(v)} className="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all"
               style={{ background: view === v ? "var(--elevated)" : "transparent", color: view === v ? "var(--text-primary)" : "var(--text-tertiary)", border: view === v ? "1px solid var(--border-bright)" : "1px solid transparent" }}>

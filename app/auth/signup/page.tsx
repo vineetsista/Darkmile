@@ -48,13 +48,17 @@ export default function SignUpPage() {
     <div className="min-h-screen flex" style={{ background: "var(--void)" }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-5/12 relative overflow-hidden" style={{ background: "var(--deep)" }}>
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 40%, rgba(139,92,246,0.15) 0%, transparent 70%)" }} />
+        <div className="absolute inset-0 grid-bg-fade opacity-60" />
+        <div className="absolute pointer-events-none" style={{ top: "-10%", left: "10%", width: "500px", height: "500px", background: "radial-gradient(ellipse, rgba(139,92,246,0.22) 0%, transparent 70%)", filter: "blur(40px)" }} />
+        <div className="absolute pointer-events-none" style={{ bottom: "-15%", right: "-15%", width: "400px", height: "400px", background: "radial-gradient(ellipse, rgba(245,158,11,0.10) 0%, transparent 70%)", filter: "blur(60px)" }} />
         <div className="relative flex flex-col justify-between p-12 w-full">
-          <DarkmileLogo />
+          <div className="flex items-center justify-between">
+            <DarkmileLogo />
+            <span className="status-live">LIVE</span>
+          </div>
           <div>
             <h2 className="text-3xl mb-6 leading-tight" style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}>
-              Every deal in your market. Before your competitors.
+              Every deal in your market. <span className="gradient-text-aurora italic">Before your competitors.</span>
             </h2>
             <ul className="space-y-3 mb-8">
               {perks.map((p) => (
@@ -64,9 +68,10 @@ export default function SignUpPage() {
                 </li>
               ))}
             </ul>
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.2)" }}>
+            <div className="opportunity-card p-5">
               <div className="flex items-center gap-2 mb-3">
-                <span className="badge badge-amber">TODAY'S TOP ALERT</span>
+                <span className="badge badge-amber">TODAY&apos;S TOP ALERT</span>
+                <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>updated 2m ago</span>
               </div>
               <div className="text-sm font-semibold mb-1" style={{ color: "var(--text-primary)" }}>3200 Morse Rd · Former Kroger Distribution</div>
               <div className="text-xs mb-3" style={{ color: "var(--text-tertiary)" }}>Groveport, OH · 52,000 SF Industrial</div>

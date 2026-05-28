@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, TrendingDown, AlertCircle, FileText, Building2, Zap, ArrowUpRight } from "lucide-react";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, AreaChart, Area } from "recharts";
-import { MOCK_TRANSACTIONS, MOCK_OPPORTUNITIES, MOCK_PERMITS, MOCK_ENTITY_FILINGS, MOCK_MARKET_STATS, MOCK_USER, MOCK_PROPERTIES } from "@/lib/mock-data";
+import { ArrowRight, ArrowUpRight, TrendingUp, TrendingDown, AlertCircle, FileText, Building2 } from "lucide-react";
+import { ResponsiveContainer, Tooltip, AreaChart, Area } from "recharts";
+import { MOCK_TRANSACTIONS, MOCK_OPPORTUNITIES, MOCK_ENTITY_FILINGS, MOCK_MARKET_STATS, MOCK_USER, MOCK_PROPERTIES } from "@/lib/mock-data";
 import { formatCurrency, formatRelativeDate, getPropertyTypeBadgeClass } from "@/lib/utils";
+import { LiveSignalRail } from "@/components/LiveSignals";
 
 function AnimatedCounter({ to, prefix = "", suffix = "", duration = 1500 }: { to: number; prefix?: string; suffix?: string; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -58,22 +59,6 @@ function MetricCard({ label, value, change, changeLabel, color, icon }: { label:
   );
 }
 
-function Sparkline({ data, color }: { data: number[]; color: string }) {
-  const max = Math.max(...data);
-  const min = Math.min(...data);
-  const w = 80, h = 32;
-  const points = data.map((v, i) => {
-    const x = (i / (data.length - 1)) * w;
-    const y = h - ((v - min) / (max - min || 1)) * h;
-    return `${x},${y}`;
-  }).join(" ");
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
-      <polyline points={points} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) => {
   if (active && payload?.length) {
     return (
@@ -92,12 +77,6 @@ export default function DashboardHome() {
 
   const volumeData = MOCK_MARKET_STATS.weeklyTrend.map((d) => ({ name: d.week, volume: d.volume }));
 
-  const recentActivity = [
-    ...MOCK_TRANSACTIONS.slice(0, 5).map((t) => ({ ...t, type: "transaction" as const })),
-    ...MOCK_PERMITS.slice(0, 3).map((p) => ({ ...p, type: "permit" as const })),
-    ...MOCK_ENTITY_FILINGS.slice(0, 2).map((e) => ({ ...e, type: "entity" as const })),
-  ].sort(() => Math.random() - 0.5).slice(0, 10);
-
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Greeting */}
@@ -115,32 +94,16 @@ export default function DashboardHome() {
         </Link>
       </div>
 
-      {/* Live ticker */}
-      <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(90deg, rgba(139,92,246,0.06), rgba(6,182,212,0.03))", border: "1px solid var(--border)" }}>
-        <div className="flex items-center gap-4 px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
-          <span className="status-live">LIVE</span>
-          <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>Streaming from county recorder, permit & SoS systems</span>
-        </div>
-        <div className="overflow-hidden py-2.5" style={{ maskImage: "linear-gradient(90deg, transparent, black 5%, black 95%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 5%, black 95%, transparent)" }}>
-          <div className="marquee" style={{ width: "max-content" }}>
-            {[...Array(2)].flatMap((_, twin) =>
-              [
-                { tone: "139,92,246",  c: "violet",  label: "SALE",   text: "Industrial $16.5M · 2500 Corporate Exchange Dr", meta: "2m ago" },
-                { tone: "245,158,11",  c: "amber",   label: "OPP 94", text: "Estate disposition · 3200 Morse Rd",              meta: "12m ago" },
-                { tone: "6,182,212",   c: "cyan",    label: "PERMIT", text: "$8.5M new construction · Rickenbacker Pkwy",      meta: "27m ago" },
-                { tone: "16,185,129",  c: "emerald", label: "ENTITY", text: "3 LLCs filed · same registered agent",            meta: "41m ago" },
-                { tone: "139,92,246",  c: "violet",  label: "SALE",   text: "Office $9.2M · 6100 Riverside Dr",                meta: "1h ago" },
-                { tone: "245,158,11",  c: "amber",   label: "OPP 87", text: "Trust-owned asset · 900 Goodale Blvd",            meta: "1h ago" },
-              ].map((it, i) => (
-                <div key={`${twin}-${i}`} className="flex items-center gap-2.5 px-3 py-1 mx-1 rounded-full whitespace-nowrap" style={{ background: `rgba(${it.tone},0.06)`, border: `1px solid rgba(${it.tone},0.18)` }}>
-                  <span style={{ fontSize: "9px", padding: "1px 6px", borderRadius: "4px", fontWeight: 700, background: `rgba(${it.tone},0.16)`, color: `var(--${it.c})`, letterSpacing: "0.05em" }}>{it.label}</span>
-                  <span className="text-xs font-medium" style={{ color: "var(--text-primary)" }}>{it.text}</span>
-                  <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>· {it.meta}</span>
-                </div>
-              ))
-            )}
+      {/* Live ticker — pulls from useLiveSignals hook (new signal every 8–14s) */}
+      <div className="rounded-2xl overflow-hidden no-print" style={{ background: "linear-gradient(90deg, rgba(139,92,246,0.06), rgba(6,182,212,0.03))", border: "1px solid var(--border)" }}>
+        <div className="flex items-center justify-between px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
+          <div className="flex items-center gap-3">
+            <span className="status-live">LIVE</span>
+            <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>Streaming from county recorder, permit & SoS systems</span>
           </div>
+          <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>new signals every few seconds</span>
         </div>
+        <LiveSignalRail />
       </div>
 
       {/* Metrics row */}

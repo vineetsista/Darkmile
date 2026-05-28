@@ -587,9 +587,49 @@ h1, h2, h3 { letter-spacing: -0.02em; }
 @media (max-width: 768px) {
   .glass-card { border-radius: 12px; }
   .hide-mobile { display: none !important; }
+  /* Dashboard main padding pull-in */
+  main { padding: 16px !important; }
+  /* Smaller cmdk on phone */
+  .cmdk-overlay { padding-top: 10vh; }
+  .cmdk-panel { width: 94vw; }
+  /* Copilot panel: full-width sheet on phone */
+  .copilot-panel { right: 8px; left: 8px; bottom: 8px; width: auto; height: 80vh; }
+  .copilot-fab { right: 16px; bottom: 16px; width: 50px; height: 50px; }
+  /* Notifications panel: full-width on phone */
+  .panel-side { width: 100vw; border-left: none; }
+  /* Toasts dock at top center */
+  .toast-stack { top: 70px; right: 8px; left: 8px; }
+  .toast { min-width: auto; max-width: none; }
+  /* Hero text scaling */
+  .opportunity-card, .metric-card { border-radius: 12px; }
 }
 
 /* Reduce motion respect */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.05ms !important; }
+}
+
+/* ─── Print stylesheet (for "Save as PDF") ───────────────────────────── */
+@media print {
+  /* Force light background, hide chrome */
+  body, html { background: white !important; color: #111 !important; }
+  body::before { display: none !important; }
+  aside, header, nav, .copilot-fab, .panel-side, .panel-backdrop, .cmdk-overlay, .toast-stack,
+  .no-print { display: none !important; }
+  main { padding: 0 !important; overflow: visible !important; }
+  .print-area { display: block !important; }
+  .glass-card, .opportunity-card, .metric-card {
+    background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; color: #111 !important;
+  }
+  .gradient-text-violet, .gradient-text-aurora, .gradient-text-amber, .gradient-text-signal {
+    -webkit-text-fill-color: #4C1D95 !important; color: #4C1D95 !important; background: none !important;
+  }
+  .badge, .badge-violet, .badge-amber, .badge-cyan, .badge-emerald, .badge-rose {
+    background: #f3f4f6 !important; color: #111 !important; border-color: #ddd !important;
+  }
+  .number-display { color: #111 !important; }
+  a { color: #4C1D95 !important; text-decoration: none !important; }
+  /* Page break hints */
+  section, .glass-card { page-break-inside: avoid; break-inside: avoid; }
+  h1, h2, h3 { color: #111 !important; page-break-after: avoid; }
 }

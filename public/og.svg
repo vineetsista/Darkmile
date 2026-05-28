@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06040A"/>
+      <stop offset="100%" stop-color="#0D0A14"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.2" cy="0" r="0.6">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.85" cy="1" r="0.5">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="logoG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="titleG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="50%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#8B5CF6" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background layers -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <rect width="1280" height="640" fill="url(#glow1)"/>
+  <rect width="1280" height="640" fill="url(#glow2)"/>
+
+  <!-- Header chip: LIVE -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="280" height="32" rx="16" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.3"/>
+    <circle cx="18" cy="16" r="4" fill="#10B981"/>
+    <text x="32" y="21" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399" letter-spacing="1.5">LIVE · FRANKLIN COUNTY, OH</text>
+  </g>
+
+  <!-- Logo lockup -->
+  <g transform="translate(80, 140)">
+    <rect x="0" y="0" width="56" height="56" rx="14" fill="url(#logoG)"/>
+    <circle cx="28" cy="28" r="11" fill="none" stroke="#FFFFFF" stroke-width="2.4" opacity="0.95"/>
+    <circle cx="28" cy="28" r="2" fill="#FFFFFF"/>
+    <text x="76" y="38" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="32" font-weight="700" fill="#F0EBF8" letter-spacing="-0.5">darkmile</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="80" y="290" font-family="'Instrument Serif', Georgia, serif" font-size="76" fill="#F0EBF8" letter-spacing="-1.5">
+    <tspan x="80" dy="0">Every deal in your market.</tspan>
+  </text>
+  <text x="80" y="370" font-family="'Instrument Serif', Georgia, serif" font-size="76" font-style="italic" fill="url(#titleG)" letter-spacing="-1.5">
+    <tspan x="80" dy="0">Before your competitors.</tspan>
+  </text>
+
+  <!-- Sub-headline -->
+  <text x="80" y="420" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="22" fill="#9D8EC0">
+    AI-powered deal intelligence for independent CRE brokers.
+  </text>
+
+  <!-- Stat row -->
+  <g transform="translate(80, 480)" font-family="ui-monospace, 'JetBrains Mono', monospace">
+    <g>
+      <text x="0" y="0" font-size="32" font-weight="700" fill="#A78BFA">2,400+</text>
+      <text x="0" y="22" font-size="12" fill="#5E4D80" font-family="ui-sans-serif, 'DM Sans', system-ui">Daily signals</text>
+    </g>
+    <g transform="translate(180, 0)">
+      <text x="0" y="0" font-size="32" font-weight="700" fill="#22D3EE">47</text>
+      <text x="0" y="22" font-size="12" fill="#5E4D80" font-family="ui-sans-serif, 'DM Sans', system-ui">County markets</text>
+    </g>
+    <g transform="translate(320, 0)">
+      <text x="0" y="0" font-size="32" font-weight="700" fill="#FCD34D">7:00am</text>
+      <text x="0" y="22" font-size="12" fill="#5E4D80" font-family="ui-sans-serif, 'DM Sans', system-ui">Daily delivery</text>
+    </g>
+    <g transform="translate(500, 0)">
+      <text x="0" y="0" font-size="32" font-weight="700" fill="#34D399">$299</text>
+      <text x="0" y="22" font-size="12" fill="#5E4D80" font-family="ui-sans-serif, 'DM Sans', system-ui">vs $1,500+ CoStar</text>
+    </g>
+  </g>
+
+  <!-- Score card mock (right side) -->
+  <g transform="translate(840, 180)">
+    <rect x="0" y="0" width="360" height="280" rx="20" fill="#160D22" stroke="#F59E0B" stroke-opacity="0.3"/>
+    <rect x="0" y="0" width="360" height="2" fill="#F59E0B" fill-opacity="0.5"/>
+    <text x="24" y="42" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="11" font-weight="700" fill="#FCD34D" letter-spacing="1.5">TOP OPPORTUNITY · SCORE 94</text>
+
+    <text x="24" y="80" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="20" font-weight="700" fill="#F0EBF8">3200 Morse Rd</text>
+    <text x="24" y="106" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="14" fill="#9D8EC0">Former Kroger · 52,000 SF Industrial</text>
+
+    <!-- Score ring -->
+    <g transform="translate(240, 130)">
+      <circle cx="0" cy="0" r="50" fill="none" stroke="#2A1D3E" stroke-width="6"/>
+      <circle cx="0" cy="0" r="50" fill="none" stroke="#FCD34D" stroke-width="6" stroke-linecap="round"
+              stroke-dasharray="295.3" stroke-dashoffset="17.7" transform="rotate(-90)"/>
+      <text x="0" y="8" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="28" font-weight="700" fill="#FCD34D">94</text>
+    </g>
+
+    <text x="24" y="150" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="12" fill="#9D8EC0">Estate disposition pattern</text>
+    <text x="24" y="170" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="12" fill="#9D8EC0">37% below replacement cost</text>
+    <text x="24" y="190" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="12" fill="#9D8EC0">Adjacent parcel +47% premium</text>
+
+    <text x="24" y="234" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11" fill="#5E4D80">EST. STABILIZED VALUE</text>
+    <text x="24" y="262" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="22" font-weight="700" fill="#FCD34D">$12.5M</text>
+  </g>
+
+  <!-- Bottom chip: keyboard shortcut hint -->
+  <g transform="translate(80, 580)">
+    <rect x="0" y="0" width="220" height="32" rx="8" fill="#160D22" stroke="#2A1D3E"/>
+    <text x="14" y="21" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="12" fill="#9D8EC0">Press</text>
+    <rect x="50" y="6" width="22" height="20" rx="4" fill="#1E1530" stroke="#3D2A5C"/>
+    <text x="61" y="20" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11" fill="#A78BFA">⌘</text>
+    <rect x="76" y="6" width="22" height="20" rx="4" fill="#1E1530" stroke="#3D2A5C"/>
+    <text x="87" y="20" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11" fill="#A78BFA">K</text>
+    <text x="106" y="21" font-family="ui-sans-serif, 'DM Sans', system-ui" font-size="12" fill="#9D8EC0">to jump anywhere</text>
+  </g>
+
+  <!-- GitHub URL footer -->
+  <text x="1200" y="601" text-anchor="end" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="12" fill="#5E4D80">github.com/vineetsista/Darkmile</text>
+</svg>

@@ -2,6 +2,8 @@
 
 <br />
 
+<img src=".github/logo.svg" alt="Darkmile" width="96" />
+
 # Darkmile
 
 ### AI-powered deal intelligence for independent CRE brokers.
@@ -140,15 +142,27 @@ Demo credentials after seeding: `marcus@webbcommercial.com` / `demo1234`
 
 ## Screenshots
 
-| Landing | Dashboard |
+### Landing
+<img src=".github/screenshots/01-landing-hero.png" alt="Landing — hero, live signal ticker, particle field" width="100%" />
+
+| ROI Calculator | Comparison vs CoStar / Reonomy / Crexi |
 |---|---|
-| Hero with radar particle field · scroll-driven reveals · live signal ticker · comparison table · ROI calculator · pricing | `⌘K` command palette · floating AI co-pilot · notifications inbox · animated counters · market pulse area chart |
+| <img src=".github/screenshots/02-landing-roi.png" alt="ROI calculator with live sliders" /> | <img src=".github/screenshots/03-landing-compare.png" alt="Feature comparison table" /> |
 
-| Daily Briefing | Opportunity Scoring | Territory Radar Map |
+### Dashboard
+<img src=".github/screenshots/05-dashboard-home.png" alt="Dashboard home with live ticker, metrics, market pulse" width="100%" />
+
+| `⌘K` Command Palette | AI Co-pilot | Notifications |
 |---|---|---|
-| AI executive summary · digest + deep-dive views · share/PDF export | Score gauges 0–100 · factor breakdown · one-click outreach drafts | Animated radar sweep · live property pins · color-coded by score |
+| <img src=".github/screenshots/11-command-palette.png" alt="Command palette with grouped results" /> | <img src=".github/screenshots/12-ai-copilot.png" alt="AI co-pilot floating chat" /> | <img src=".github/screenshots/13-notifications.png" alt="Sliding notifications panel" /> |
 
-> *Live demo screenshots will be added here once deployed. Run `npm run dev` to see all of the above locally in under a minute.*
+| Opportunities | Deal Flow | Territory Radar Map |
+|---|---|---|
+| <img src=".github/screenshots/06-dashboard-opportunities.png" alt="Scored opportunities with gauges + outreach" /> | <img src=".github/screenshots/07-dashboard-deals.png" alt="Deal flow grid + filters" /> | <img src=".github/screenshots/08-dashboard-map.png" alt="Radar-sweep territory map" /> |
+
+| Daily Briefing | Analytics | Sign In |
+|---|---|---|
+| <img src=".github/screenshots/09-dashboard-briefing.png" alt="Daily AI briefing with score gauges" /> | <img src=".github/screenshots/10-dashboard-analytics.png" alt="Market analytics dashboard" /> | <img src=".github/screenshots/04-signin.png" alt="Sign in split-screen" /> |
 
 <br />
 

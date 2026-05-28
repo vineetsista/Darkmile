@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   },
   description:
     "AI-powered deal intelligence for independent commercial real estate brokers. Every deed transfer, building permit, and opportunity alert — in your territory, before your competitors.",
-  keywords: ["commercial real estate", "CRE", "deal intelligence", "property data", "Columbus OH"],
+  keywords: ["commercial real estate", "CRE", "deal intelligence", "property data", "Columbus OH", "AI", "signal intelligence"],
   authors: [{ name: "Darkmile" }],
   openGraph: {
     title: "Darkmile — Every Deal in Your Market. Before Your Competitors.",
@@ -16,6 +16,16 @@ export const metadata: Metadata = {
       "AI-powered deal intelligence for independent CRE brokers. Daily briefings with deed transfers, permits, and opportunity alerts.",
     type: "website",
     siteName: "Darkmile",
+    images: [{ url: "/og.svg", width: 1280, height: 640, alt: "Darkmile — signal intelligence for CRE brokers" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Darkmile — CRE Deal Intelligence",
+    description: "Every deed transfer, permit, and opportunity alert in your territory — scored, ranked, and delivered before your competition sees it.",
+    images: ["/og.svg"],
+  },
+  icons: {
+    icon: "/og.svg",
   },
 };
 

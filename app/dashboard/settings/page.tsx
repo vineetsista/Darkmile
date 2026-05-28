@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { User, MapPin, Bell, CreditCard, Code, Shield, Check, ChevronRight } from "lucide-react";
+import { User, MapPin, Bell, CreditCard, Code, Check, ChevronRight } from "lucide-react";
 import { MOCK_USER } from "@/lib/mock-data";
 
 const TABS = [

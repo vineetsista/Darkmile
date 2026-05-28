@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Layers, Clock, Filter, AlertCircle, ArrowUpRight, FileText } from "lucide-react";
+import { MapPin, AlertCircle, ArrowUpRight, FileText } from "lucide-react";
 import { MOCK_PROPERTIES, MOCK_OPPORTUNITIES, MOCK_TRANSACTIONS } from "@/lib/mock-data";
 import { formatCurrency } from "@/lib/utils";
 

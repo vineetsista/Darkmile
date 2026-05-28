@@ -45,17 +45,24 @@ export default function SignInPage() {
     <div className="min-h-screen flex" style={{ background: "var(--void)" }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{ background: "var(--deep)" }}>
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 30% 50%, rgba(139,92,246,0.15) 0%, transparent 70%)" }} />
+        <div className="absolute inset-0 grid-bg-fade opacity-60" />
+        <div className="absolute pointer-events-none" style={{ top: "-10%", left: "20%", width: "600px", height: "600px", background: "radial-gradient(ellipse, rgba(139,92,246,0.2) 0%, transparent 70%)", filter: "blur(40px)" }} />
+        <div className="absolute pointer-events-none" style={{ bottom: "-10%", right: "-10%", width: "400px", height: "400px", background: "radial-gradient(ellipse, rgba(6,182,212,0.12) 0%, transparent 70%)", filter: "blur(60px)" }} />
         <div className="relative flex flex-col justify-between p-12 w-full">
-          <DarkmileLogo />
+          <div className="flex items-center justify-between">
+            <DarkmileLogo />
+            <span className="status-live">47 signals today</span>
+          </div>
           <div>
             <blockquote className="text-2xl leading-relaxed mb-6" style={{ fontFamily: "var(--font-serif)", color: "var(--text-primary)" }}>
-              &ldquo;I closed 3 off-market deals in 60 days using Darkmile opportunity alerts. The entity filing signals alone are worth 10x the subscription.&rdquo;
+              &ldquo;I closed 3 off-market deals in 60 days using Darkmile opportunity alerts. The entity filing signals alone are worth <span className="gradient-text-aurora italic">10x the subscription</span>.&rdquo;
             </blockquote>
-            <div>
-              <div className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>Marcus Webb</div>
-              <div className="text-xs" style={{ color: "var(--text-tertiary)" }}>Industrial Broker · Webb Commercial Realty · Columbus, OH</div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "linear-gradient(135deg, var(--violet), var(--cyan))", color: "white" }}>MW</div>
+              <div>
+                <div className="font-bold text-sm" style={{ color: "var(--text-primary)" }}>Marcus Webb</div>
+                <div className="text-xs" style={{ color: "var(--text-tertiary)" }}>Industrial Broker · Webb Commercial Realty · Columbus, OH</div>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-6">
